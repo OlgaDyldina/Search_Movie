@@ -1,49 +1,78 @@
 package com.example.search_movie
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.support.v4.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initNavigation()
+
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
+
     }
+        fun launchDetailsFragment(film: Film) {
 
-    private fun initNavigation() {
-        topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.settings -> {
-                    Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
-            }
+            val bundle = Bundle()
+            bundle.putParcelable("film", film)
+            val fragment = DetailsFragment()
+            fragment.arguments = bundle
+
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_placeholder, fragment)
+                .addToBackStack(null)
+                .commit()
         }
 
-        bottom_navigation.setOnNavigationItemSelectedListener {
+        private fun initNavigation() {
 
-            when (it.itemId) {
-                R.id.favorites -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
-                    true
+            bottom_navigation.setOnNavigationItemSelectedListener {
+
+                 when (it.itemId) {
+                        R.id.home -> {
+                            val tag = "home"
+                            val fragment = checkFragmentExistence(tag)
+                            changeFragment(fragment ?: HomeFragment(), tag)
+                            true
+                        }
+                    R.id.favorites -> {
+                        supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.fragment_placeholder, FavoritesFragment())
+                            .addToBackStack(null)
+                            .commit()
+                        true
+                    }
+                    R.id.watch_later -> {
+                        Toast.makeText(this, "Смотреть позже", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    R.id.selections -> {
+                        Toast.makeText(this, "Подборки", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    else -> false
                 }
-                R.id.watch_later -> {
-                    Toast.makeText(this, "Смотреть позже", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.selections -> {
-                    Toast.makeText(this, "Подборки", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
             }
         }
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
     }
 }
