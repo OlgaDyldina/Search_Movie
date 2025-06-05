@@ -1,6 +1,11 @@
 package com.example.search_movie
 
 import android.os.Bundle
+import android.support.transition.Slide
+import android.support.transition.TransitionSet
+import android.transition.Scene
+import android.transition.TransitionManager
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,30 +61,41 @@ class HomeFragment : Fragment() {
 
     )
 
-     override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-            return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root,requireActivity(),1)
+
+        initSearchView()
+
+        initRecyckler()
+        filmsAdapter.addItems(filmsDataBase)
+    }
 
         search_view.setOnClickListener {
             search_view.isIconified = false
         }
 
-            search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
-                override fun onQueryTextChange(newText: String): Boolean {
-                    if (newText.isEmpty()) {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isEmpty()) {
                     filmsAdapter.addItems(filmsDataBase)
                     return true
                 }
                 val result = filmsDataBase.filter {
-                    it.title.toLowerCase(Locale.getDefault()).contains(newText.toLowerCase(Locale.getDefault()))
+                    it.title.toLowerCase(Locale.getDefault())
+                        .contains(newText.toLowerCase(Locale.getDefault()))
                 }
                 filmsAdapter.addItems(result)
                 return true

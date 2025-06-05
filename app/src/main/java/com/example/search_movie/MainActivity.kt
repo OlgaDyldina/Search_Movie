@@ -1,6 +1,7 @@
 package com.example.search_movie
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,7 +39,13 @@ class MainActivity : AppCompatActivity() {
 
             bottom_navigation.setOnNavigationItemSelectedListener {
 
-                when (it.itemId) {
+                 when (it.itemId) {
+                        R.id.home -> {
+                            val tag = "home"
+                            val fragment = checkFragmentExistence(tag)
+                            changeFragment(fragment ?: HomeFragment(), tag)
+                            true
+                        }
                     R.id.favorites -> {
                         supportFragmentManager
                             .beginTransaction()
@@ -59,4 +66,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
+    }
 }
