@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp">
 
-    <com.example.search_movie.RatingDonutView
+    <com.example.search_movie.view.customviews.RatingDonutView
         android:id="@+id/rating_donut"
         android:layout_width="50dp"
         android:layout_height="50dp"

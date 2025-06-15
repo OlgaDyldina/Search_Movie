@@ -1,16 +1,24 @@
-package com.example.search_movie
+package com.example.search_movie.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.search_movie.R
+import com.example.search_movie.domain.Film
+import com.example.search_movie.databinding.ActivityMainBinding
+import com.example.search_movie.view.fragments.DetailsFragment
+import com.example.search_movie.view.fragments.FavoritesFragment
+import com.example.search_movie.view.fragments.HomeFragment
+import com.example.search_movie.view.fragments.SelectionsFragment
+import com.example.search_movie.view.fragments.WatchLaterFragment
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initNavigation()
 
@@ -37,29 +45,31 @@ class MainActivity : AppCompatActivity() {
 
         private fun initNavigation() {
 
-            bottom_navigation.setOnNavigationItemSelectedListener {
+            binding.bottomNavigation.setOnNavigationItemSelectedListener {
 
                  when (it.itemId) {
                         R.id.home -> {
                             val tag = "home"
                             val fragment = checkFragmentExistence(tag)
-                            changeFragment(fragment ?: HomeFragment(), tag)
+                            changeFragment(fragment?: HomeFragment(), tag)
                             true
                         }
                     R.id.favorites -> {
-                        supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.fragment_placeholder, FavoritesFragment())
-                            .addToBackStack(null)
-                            .commit()
+                       val tag = "favorites"
+                       val fragment = checkFragmentExistence(tag)
+                       changeFragment(fragment?: FavoritesFragment(), tag)
                         true
                     }
                     R.id.watch_later -> {
-                        Toast.makeText(this, "Смотреть позже", Toast.LENGTH_SHORT).show()
+                        val tag = "watch later"
+                        val fragment = checkFragmentExistence(tag)
+                        changeFragment(fragment?: WatchLaterFragment(), tag)
                         true
                     }
                     R.id.selections -> {
-                        Toast.makeText(this, "Подборки", Toast.LENGTH_SHORT).show()
+                        val tag = "selections"
+                        val fragment = checkFragmentExistence(tag)
+                        changeFragment(fragment?: SelectionsFragment(), tag)
                         true
                     }
                     else -> false

@@ -1,4 +1,4 @@
-package com.example.search_movie
+package com.example.search_movie.domain
 
 import android.os.Parcelable
 import androidx.versionedparcelable.VersionedParcelize

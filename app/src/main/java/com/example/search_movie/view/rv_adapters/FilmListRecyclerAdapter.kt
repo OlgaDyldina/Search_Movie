@@ -1,9 +1,12 @@
-package com.example.search_movie
+package com.example.search_movie.view.rv_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.film_item.view.*
+import com.example.search_movie.R
+import com.example.search_movie.domain.Film
+import com.example.search_movie.view.rv_viewholders.FilmViewHolder
+
 
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
       private val items = mutableListOf<Film>()

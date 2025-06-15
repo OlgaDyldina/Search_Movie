@@ -1,4 +1,4 @@
-package com.example.search_movie
+package com.example.search_movie.utils
 
 import android.app.Activity
 import android.view.View

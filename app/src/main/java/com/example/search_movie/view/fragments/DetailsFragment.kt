@@ -1,21 +1,25 @@
-package com.example.search_movie
+package com.example.search_movie.view.fragments
 
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_details.*
+import com.example.search_movie.R
+import com.example.search_movie.domain.Film
+import com.example.search_movie.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film
+    private lateinit var binding: FragmentDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_details, container, false)
+        binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,17 +27,17 @@ class DetailsFragment : Fragment() {
 
         setFilmsDetails()
 
-        details_fab_favorites.setOnClickListener {
+        binding.detailsFabFavorites.setOnClickListener {
             if (!film.isInFavorites) {
-                details_fab_favorites.setImageResource(R.drawable.baseline_favorite_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.baseline_favorite_24)
                 film.isInFavorites = true
             } else {
-                details_fab_favorites.setImageResource(R.drawable.baseline_favorite_border_24)
+                binding.detailsFabFavorites.setImageResource(R.drawable.baseline_favorite_border_24)
                 film.isInFavorites = false
             }
         }
 
-        details_fab_share.setOnClickListener {
+        binding.detailsFab.setOnClickListener {
             val intent = Intent()
             intent.action = Intent.ACTION_SEND
             intent.putExtra(
@@ -47,11 +51,11 @@ class DetailsFragment : Fragment() {
 
     private fun setFilmsDetails() {
         film = arguments?.get("film") as Film
-        details_toolbar.title = film.title
-        details_poster.setImageResource(film.poster)
-        details_description.text = film.description
+        binding.detailsToolbar.title = film.title
+        binding.detailsPoster.setImageResource(film.poster)
+        binding.detailsDescription.text = film.description
 
-        details_fab_favorites.setImageResource(
+        binding.detailsFabFavorites.setImageResource(
             if (film.isInFavorites) R.drawable.baseline_favorite_24
             else R.drawable.baseline_favorite_border_24
         )
