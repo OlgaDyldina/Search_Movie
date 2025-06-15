@@ -33,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -50,8 +54,11 @@ dependencies {
     implementation(libs.androidx.vectordrawable)
     implementation(libs.kotlin.reflect)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.coordinatorlayout)
+    implementation(libs.androidx.navigation.dynamic.features.fragment)
+    implementation(libs.androidx.databinding.adapters)
+    implementation(libs.library)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-}
+   }
