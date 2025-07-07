@@ -6,8 +6,8 @@ import androidx.versionedparcelable.VersionedParcelize
 @VersionedParcelize
 data class Film(
     val title: String,
-    val poster: Int,
+    val poster: String,
     val description: String,
-    var rating: Float = 0f,
+    var rating: Double = 0.0,
     var isInFavorites: Boolean = false
 ) : Parcelable

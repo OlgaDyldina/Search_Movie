@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.search_movie.R
-import com.example.search_movie.domain.Film
+import com.example.search_movie.data.ApiConstants
 import com.example.search_movie.databinding.FragmentDetailsBinding
+import com.example.search_movie.domain.Film
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film
@@ -52,7 +54,10 @@ class DetailsFragment : Fragment() {
     private fun setFilmsDetails() {
         film = arguments?.get("film") as Film
         binding.detailsToolbar.title = film.title
-        binding.detailsPoster.setImageResource(film.poster)
+        Glide.with(this)
+            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .centerCrop()
+            .into(binding.detailsPoster)
         binding.detailsDescription.text = film.description
 
         binding.detailsFabFavorites.setImageResource(
