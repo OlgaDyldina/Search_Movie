@@ -10,6 +10,7 @@ import com.example.search_movie.view.fragments.DetailsFragment
 import com.example.search_movie.view.fragments.FavoritesFragment
 import com.example.search_movie.view.fragments.HomeFragment
 import com.example.search_movie.view.fragments.SelectionsFragment
+import com.example.search_movie.view.fragments.SettingsFragment
 import com.example.search_movie.view.fragments.WatchLaterFragment
 
 class MainActivity : AppCompatActivity() {
@@ -29,54 +30,68 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
-        fun launchDetailsFragment(film: Film) {
 
-            val bundle = Bundle()
-            bundle.putParcelable("film", film)
-            val fragment = DetailsFragment()
-            fragment.arguments = bundle
+    fun launchDetailsFragment(film: Film) {
 
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_placeholder, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
+        val bundle = Bundle()
+        bundle.putParcelable("film", film)
+        val fragment = DetailsFragment()
+        fragment.arguments = bundle
 
-        private fun initNavigation() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
-            binding.bottomNavigation.setOnNavigationItemSelectedListener {
+    private fun initNavigation() {
 
-                 when (it.itemId) {
-                        R.id.home -> {
-                            val tag = "home"
-                            val fragment = checkFragmentExistence(tag)
-                            changeFragment(fragment?: HomeFragment(), tag)
-                            true
-                        }
-                    R.id.favorites -> {
-                       val tag = "favorites"
-                       val fragment = checkFragmentExistence(tag)
-                       changeFragment(fragment?: FavoritesFragment(), tag)
-                        true
-                    }
-                    R.id.watch_later -> {
-                        val tag = "watch later"
-                        val fragment = checkFragmentExistence(tag)
-                        changeFragment(fragment?: WatchLaterFragment(), tag)
-                        true
-                    }
-                    R.id.selections -> {
-                        val tag = "selections"
-                        val fragment = checkFragmentExistence(tag)
-                        changeFragment(fragment?: SelectionsFragment(), tag)
-                        true
-                    }
-                    else -> false
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
+
+            when (it.itemId) {
+                R.id.home -> {
+                    val tag = "home"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: HomeFragment(), tag)
+                    true
                 }
+
+                R.id.favorites -> {
+                    val tag = "favorites"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: FavoritesFragment(), tag)
+                    true
+                }
+
+                R.id.watch_later -> {
+                    val tag = "watch later"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: WatchLaterFragment(), tag)
+                    true
+                }
+
+                R.id.selections -> {
+                    val tag = "selections"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: SelectionsFragment(), tag)
+                    true
+                }
+
+                R.id.settings -> {
+                    val tag = "settings"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: SettingsFragment(), tag)
+                    true
+                }
+
+                else -> false
             }
         }
-    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+    }
+
+    private fun checkFragmentExistence(tag: String): Fragment? =
+        supportFragmentManager.findFragmentByTag(tag)
 
     private fun changeFragment(fragment: Fragment, tag: String) {
         supportFragmentManager
