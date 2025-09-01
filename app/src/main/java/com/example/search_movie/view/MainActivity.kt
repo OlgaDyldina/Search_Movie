@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import com.example.search_movie.R
-import com.example.search_movie.domain.Film
+import com.example.search_movie.data.entity.Film
 import com.example.search_movie.databinding.ActivityMainBinding
 import com.example.search_movie.view.fragments.DetailsFragment
 import com.example.search_movie.view.fragments.FavoritesFragment

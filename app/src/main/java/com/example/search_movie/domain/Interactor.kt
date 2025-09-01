@@ -2,6 +2,7 @@ package com.example.search_movie.domain
 
 import com.example.search_movie.data.MainRepository
 import com.example.search_movie.data.TmdbApi
+import com.example.search_movie.data.entity.Film
 import com.example.search_movie.data.entity.TmdbResultsDto
 import com.example.search_movie.data.preferenes.PreferenceProvider
 import com.example.search_movie.utils.Converter
@@ -17,9 +18,9 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
             override fun onResponse(call: Call<TmdbResultsDto>, response: Response<TmdbResultsDto>) {
                 val list = Converter.convertApiListToDTOList(response.body()?.tmdbFilms)
                 list.forEach {
-                    repo.putToDb(film = it)
+                    repo.putToDb(list)
                 }
-                callback.onSuccess(list)
+                callback.onSuccess()
             }
 
             override fun onFailure(call: Call<TmdbResultsDto>, t: Throwable) {

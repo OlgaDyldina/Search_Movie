@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.search_movie.data.ApiConstants
-import com.example.search_movie.domain.Film
+import com.example.search_movie.data.entity.Film
 
 class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val title = itemView.title

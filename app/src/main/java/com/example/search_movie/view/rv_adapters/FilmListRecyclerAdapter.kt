@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.search_movie.R
-import com.example.search_movie.domain.Film
+import com.example.search_movie.data.entity.Film
 import com.example.search_movie.view.rv_viewholders.FilmViewHolder
 
 
