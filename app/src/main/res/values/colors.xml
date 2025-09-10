@@ -7,4 +7,7 @@
     <color name="Turquoise">#40E0D0</color>
     <color name="Plum">#DDA0DD</color>
     <color name="SlateBlue">#6A5ACD</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#FF7043</color>
 </resources>
