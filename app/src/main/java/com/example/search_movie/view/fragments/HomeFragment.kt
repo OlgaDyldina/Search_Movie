@@ -17,6 +17,11 @@ import com.example.search_movie.view.MainActivity
 import com.example.search_movie.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.search_movie.view.rv_adapters.TopSpacingItemDecoration
 import com.example.search_movie.viewmodel.HomeFragmentViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Locale
 
 
@@ -26,6 +31,7 @@ class HomeFragment : Fragment() {
     }
     private lateinit var binding: FragmentHomeBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
+    private lateinit var scope: CoroutineScope
     private var filmsDataBase = listOf<Film>()
         set(value) {
             if (field == value) return
@@ -49,18 +55,33 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot,requireActivity(),1)
+        AnimationHelper.performFragmentCircularRevealAnimation(
+            binding.homeFragmentRoot,
+            requireActivity(),
+            1
+        )
 
         initSearchView()
+        initPullToRefresh()
         initRecyckler()
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
-        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
-            binding.progressBar.isVisible = it
-        })
+
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                viewModel.filmsListData.collect {
+                    withContext(Dispatchers.Main) {
+                        filmsAdapter.addItems(it)
+                        filmsDataBase = it
+                    }
+                }
+            }
+        }
     }
+
+    override fun onStop() {
+        super.onStop()
+        scope.cancel()
+    }
+
     private fun initPullToRefresh() {
           binding.pullToRefresh.setOnRefreshListener {
             filmsAdapter.items.clear()
@@ -92,9 +113,6 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
-
-        initRecyckler()
-        filmsAdapter.addItems(filmsDataBase)
     }
 
     private fun initRecyckler() {
@@ -111,6 +129,5 @@ class HomeFragment : Fragment() {
             addItemDecoration(decorator)
         }
     }
-
 
 }

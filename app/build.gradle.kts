@@ -73,5 +73,8 @@ dependencies {
     annotationProcessor ("com.google.dagger:dagger-compiler:2.30.1")
     implementation ("androidx.core:core-ktx:1.3.2")
     implementation ("androidx.room:room-runtime:2.7.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
     kapt ("androidx.room:room-compiler:2.7.0")
+    implementation("androidx.room:room-ktx:2.2.1")
 }
