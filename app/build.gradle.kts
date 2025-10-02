@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id ("kotlin-kapt")
 }
 
 android {
@@ -33,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -42,16 +47,36 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.core)
     implementation(libs.androidx.cardview)
     implementation(libs.kotlin.stdlib)
     implementation(libs.design)
-    implementation(libs.support.vector.drawable)
     implementation(libs.androidx.vectordrawable)
     implementation(libs.kotlin.reflect)
     implementation(libs.androidx.recyclerview)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
+    implementation(libs.androidx.coordinatorlayout)
+    implementation(libs.androidx.databinding.adapters)
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation (libs.kotlin.stdlib.jdk7)
+    implementation (libs.androidx.appcompat.v120)
+    implementation (libs.androidx.constraintlayout.v201)
+    implementation (libs.androidx.cardview)
+    implementation (libs.androidx.legacy.support.v4)
+    testImplementation (libs.hamcrest.library)
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
+    implementation(libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.logging.interceptor)
+    androidTestImplementation(libs.androidx.junit.v113)
+    androidTestImplementation(libs.androidx.espresso.core.v340)
+    implementation (libs.dagger)
+    annotationProcessor (libs.dagger.compiler)
+    implementation (libs.androidx.core.ktx.v132)
+    implementation (libs.androidx.room.runtime)
+    implementation (libs.kotlinx.coroutines.core)
+    implementation (libs.kotlinx.coroutines.android)
+    kapt (libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation (libs.rxandroid)
+    implementation (libs.rxjava)
 }
