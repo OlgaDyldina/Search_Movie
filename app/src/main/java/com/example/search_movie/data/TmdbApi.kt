@@ -1,6 +1,6 @@
 package com.example.search_movie.data
 
-import com.example.search_movie.data.entity.TmdbResultsDto
+import com.example.search_movie.data.entity.TmdbResults
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,5 +13,5 @@ interface TmdbApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<TmdbResultsDto>
+    ): Call<TmdbResults>
 }

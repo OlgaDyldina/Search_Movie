@@ -5,12 +5,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.search_movie.data.ApiConstants
 import com.example.search_movie.data.entity.Film
+import com.example.search_movie.databinding.FilmItemBinding
 
 class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val title = itemView.title
-    private val poster = itemView.poster
-    private val description = itemView.description
-    private val ratingDonut = itemView.rating_donut
+    private val filmItemBinding = FilmItemBinding.bind(itemView)
+    private val title = filmItemBinding.title
+    private val poster = filmItemBinding.poster
+    private val description = filmItemBinding.description
+    private val ratingDonut = filmItemBinding.rating_donut
 
       fun bind(film: Film) {
         title.text = film.title
