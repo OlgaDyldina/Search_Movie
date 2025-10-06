@@ -8,10 +8,9 @@ import com.example.search_movie.domain.Interactor
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
-import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 @Module
-class DomainModule (context: Context){
+class DomainModule (val context: Context){
     @Provides
     fun provideContext() = context
     @Singleton

@@ -12,7 +12,7 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val title = filmItemBinding.title
     private val poster = filmItemBinding.poster
     private val description = filmItemBinding.description
-    private val ratingDonut = filmItemBinding.rating_donut
+    private val ratingDonut = filmItemBinding.ratingDonut
 
       fun bind(film: Film) {
         title.text = film.title

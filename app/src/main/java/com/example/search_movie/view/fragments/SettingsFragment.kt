@@ -28,7 +28,7 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AnimationHelper.performFragmentCircularRevealAnimation(settings_fragment_root, requireActivity(), 5)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.settingsFragmentRoot, requireActivity(), 5)
         viewModel.categoryPropertyLifeData.observe(viewLifecycleOwner, Observer<String> {
             when(it) {
                 POPULAR_CATEGORY -> binding.radioGroup.check(R.id.radio_popular)
