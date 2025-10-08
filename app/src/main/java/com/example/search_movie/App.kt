@@ -4,8 +4,7 @@ import android.app.Application
 import com.example.search_movie.di.AppComponent
 import com.example.search_movie.di.modules.DatabaseModule
 import com.example.search_movie.di.modules.DomainModule
-import com.example.search_movie.di.modules.RemoteModule
-import okhttp3.internal.Internal.instance
+import com.example.remote_module.RemoteModule
 
 
 class App : Application() {
@@ -14,8 +13,9 @@ class App : Application() {
         override fun onCreate() {
             super.onCreate()
             instance = this
+            val remoteProvider = DaggerRemoteComponent.create()
             dagger = DaggerAppComponent.builder()
-                .remoteModule(RemoteModule())
+                .remoteModule(com.example.remote_module.RemoteModule())
                 .databaseModule(DatabaseModule())
                 .domainModule(DomainModule(this))
                 .build()

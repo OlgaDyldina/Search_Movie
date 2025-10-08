@@ -1,4 +1,4 @@
-package com.example.search_movie.data.entity
+package com.example.remote_module.entity
 
 import com.google.gson.annotations.SerializedName
 

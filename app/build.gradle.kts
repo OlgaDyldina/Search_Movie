@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout.v201)
     implementation(libs.androidx.cardview)
     implementation(libs.androidx.legacy.support.v4)
+    implementation(project(":app:remote_module"))
     testImplementation(libs.hamcrest.library)
     implementation(libs.glide)
     annotationProcessor(libs.compiler)

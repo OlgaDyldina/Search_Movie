@@ -1,6 +1,5 @@
-package com.example.search_movie.data
+package com.example.remote_module
 
-import com.example.search_movie.data.entity.TmdbResults
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
 import retrofit2.http.GET
@@ -14,7 +13,7 @@ interface TmdbApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<TmdbResults>
+    ): Call<com.example.remote_module.entity.TmdbResults>
 
     @GET("3/search/movie")
     fun getFilmFromSearch(
@@ -22,5 +21,5 @@ interface TmdbApi {
         @Query("language") language: String,
         @Query("query") query: String,
         @Query("page") page: Int
-    ): Observable<TmdbResults>
+    ): Observable<com.example.remote_module.entity.TmdbResults>
 }

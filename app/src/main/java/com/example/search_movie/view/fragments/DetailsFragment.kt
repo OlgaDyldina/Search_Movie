@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.search_movie.R
-import com.example.search_movie.data.ApiConstants
+import com.example.remote_module.entity.ApiConstants
 import com.example.search_movie.data.entity.Film
 import com.example.search_movie.databinding.FragmentDetailsBinding
 import com.example.search_movie.viewmodel.DetailsFragmentViewModel
@@ -84,7 +84,7 @@ class DetailsFragment : Fragment() {
         film = arguments?.get("film") as Film
         binding.detailsToolbar.title = film.title
         Glide.with(this)
-            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .load(com.example.remote_module.entity.ApiConstants.IMAGES_URL + "w780" + film.poster)
             .centerCrop()
             .into(binding.detailsPoster)
         binding.detailsDescription.text = film.description
@@ -103,7 +103,7 @@ class DetailsFragment : Fragment() {
             MainScope().launch {
             binding.progressBar.isVisible = true
             val job = scope.async {
-                viewModel.loadWallpaper(ApiConstants.IMAGES_URL + "original" + film.poster)
+                viewModel.loadWallpaper(com.example.remote_module.entity.ApiConstants.IMAGES_URL + "original" + film.poster)
             }
             saveToGallery(job.await())
             Snackbar.make(
