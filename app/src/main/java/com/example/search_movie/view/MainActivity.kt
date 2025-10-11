@@ -1,11 +1,15 @@
 package com.example.search_movie.view
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import com.example.search_movie.R
 import com.example.search_movie.data.entity.Film
 import com.example.search_movie.databinding.ActivityMainBinding
+import com.example.search_movie.reseivers.ConnectionChecker
 import com.example.search_movie.view.fragments.DetailsFragment
 import com.example.search_movie.view.fragments.FavoritesFragment
 import com.example.search_movie.view.fragments.HomeFragment
@@ -15,6 +19,7 @@ import com.example.search_movie.view.fragments.WatchLaterFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var reciver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +34,19 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
 
+        reciver = ConnectionChecker()
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(reciver, filters)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(reciver)
+    }
+
 
     fun launchDetailsFragment(film: Film) {
 
