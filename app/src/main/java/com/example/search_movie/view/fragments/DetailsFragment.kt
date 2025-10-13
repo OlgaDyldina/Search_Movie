@@ -21,6 +21,7 @@ import com.example.search_movie.R
 import com.example.remote_module.entity.ApiConstants
 import com.example.search_movie.data.entity.Film
 import com.example.search_movie.databinding.FragmentDetailsBinding
+import com.example.search_movie.view.notifications.NotificationHelper
 import com.example.search_movie.viewmodel.DetailsFragmentViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -72,6 +73,10 @@ class DetailsFragment : Fragment() {
 
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
         }
     }
     override fun onDestroy() {
