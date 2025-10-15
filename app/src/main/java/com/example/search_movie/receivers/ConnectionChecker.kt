@@ -1,4 +1,4 @@
-package com.example.search_movie.reseivers
+package com.example.search_movie.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context

@@ -76,7 +76,7 @@ class DetailsFragment : Fragment() {
         }
 
         binding.detailsFabWatchLater.setOnClickListener {
-            NotificationHelper.createNotification(requireContext(), film)
+            NotificationHelper.notificationSet(requireContext(), film)
         }
     }
     override fun onDestroy() {
@@ -166,9 +166,9 @@ class DetailsFragment : Fragment() {
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 contentValues
             )
-            val outputStream = contentResolver.openOutputStream(uri!!)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-            outputStream?.close()
+            val outPutStream = contentResolver.openOutputStream(uri!!)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outPutStream)
+            outPutStream?.close()
         } else {
             @Suppress("DEPRECATION")
             MediaStore.Images.Media.insertImage(

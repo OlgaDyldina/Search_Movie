@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.search_movie.R
 import com.example.search_movie.data.entity.Film
 import com.example.search_movie.databinding.ActivityMainBinding
-import com.example.search_movie.reseivers.ConnectionChecker
+import com.example.search_movie.receivers.ConnectionChecker
 import com.example.search_movie.view.fragments.DetailsFragment
 import com.example.search_movie.view.fragments.FavoritesFragment
 import com.example.search_movie.view.fragments.HomeFragment
